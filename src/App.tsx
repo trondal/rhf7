@@ -1,22 +1,27 @@
 import * as React from 'react';
-import { Project } from './lib/Interfaces';
+import { IProject } from './lib/Interfaces';
+import Requirement from './Requirement';
 import Sidebar from './Sidebar';
 
 function App() {
-  const [selected, setSelected] = React.useState(-1);
+  const [selected, setSelected] = React.useState(1);
 
-  const project: Project = {
+  const project: IProject = {
     name: 'Tronds project',
     needs: [
-      { name: 'need 1', requirements: [] },
+      { id: '1', name: 'need 1', type: 'need', requirements: [] },
       {
+        id: '2',
         name: 'need 2',
+        type: 'need',
         requirements: [
           {
             name: 'requirement 1',
+            type: 'requirement',
             variants: [
               {
                 name: 'Variant 1',
+                type: 'variant',
                 questions: [
                   {
                     name: 'Question 1'
@@ -24,10 +29,25 @@ function App() {
                 ]
               }
             ]
+          },
+          {
+            name: 'requirement 2',
+            type: 'requirement',
+            variants: [
+              {
+                name: 'Variant 2',
+                type: 'variant',
+                questions: [
+                  {
+                    name: 'Question 2'
+                  }
+                ]
+              }
+            ]
           }
         ]
       },
-      { name: 'need 3', requirements: [] }
+      { id: '3', name: 'need 3', type: 'need', requirements: [] }
     ]
   };
 
@@ -40,7 +60,11 @@ function App() {
       </div>
       <div
         style={{ backgroundColor: 'lightgray', width: '70%', height: '95vh' }}
-      ></div>
+      >
+        {selected !== -1 && (
+          <Requirement selected={selected} project={project} />
+        )}
+      </div>
       <code>{selected}</code>
     </div>
   );

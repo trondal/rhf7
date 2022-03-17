@@ -1,23 +1,29 @@
-export interface Project {
+import { string } from 'yup';
+
+export interface IProject {
   name: string;
-  needs: Need[];
+  needs: INeed[];
 }
 
-interface Need {
+export interface INeed {
+  id: string;
   name: string;
-  requirements: Requirement[];
+  type: string;
+  requirements: IRequirement[];
 }
 
-interface Requirement {
+export interface IRequirement {
   name: string;
-  variants: Variant[];
+  variants: IVariant[];
+  type: string;
 }
 
-interface Variant {
+export interface IVariant {
   name: string;
-  questions: Question[];
+  type: string;
+  questions: IQuestion[];
 }
 
-interface Question {
+export interface IQuestion {
   name: string;
 }
